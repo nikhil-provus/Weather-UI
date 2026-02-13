@@ -26,6 +26,7 @@ export async function fetchWeatherData(city: string, unit: Unit): Promise<Weathe
             windSpeed: rawData.currentConditions.windspeed,
             cloudcover: rawData.currentConditions.cloudcover,
             visibility: rawData.currentConditions.visibility,
+            unit: unit,
             hours: rawData.days[0].hours.map((h: any) => ({
                 datetime: h.datetime,
                 temp: h.temp,

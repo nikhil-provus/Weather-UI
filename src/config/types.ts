@@ -3,6 +3,7 @@ export interface HourlyData {
   temp: number;
   condition: string;
   icon: string;
+  unit: Unit;
 }
 
 export interface WeatherData {
@@ -17,6 +18,7 @@ export interface WeatherData {
   cloudcover: number;
   visibility: number;
   hours: HourlyData[]; 
+  unit: Unit;
 }
 
 export interface Props {

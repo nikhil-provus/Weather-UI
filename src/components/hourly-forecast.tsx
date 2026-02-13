@@ -1,6 +1,8 @@
-export default function HourlyForecast({ hourly }: { hourly: any[] }) {
+import { Unit } from "../config/types";
+
+export default function HourlyForecast({ hourly, unit }: { hourly: any[], unit: Unit }) {
   const colWidth = 85; 
-  const graphHeight = 70; // Adjusted for better vertical spacing
+  const graphHeight = 70; 
   const MET_BASE = "https://raw.githubusercontent.com/metno/weathericons/main/weather/svg/";
 
   const data = hourly?.slice(0, 24) || [];
@@ -8,7 +10,6 @@ export default function HourlyForecast({ hourly }: { hourly: any[] }) {
   const max = Math.max(...temps) + 2;
   const min = Math.min(...temps) - 2;
   
-  // Logic to calculate Y position on the SVG
   const getY = (t: number) => graphHeight - ((t - min) / (max - min)) * graphHeight;
 
   const points = data.map((h, i) => ({
@@ -17,8 +18,6 @@ export default function HourlyForecast({ hourly }: { hourly: any[] }) {
   }));
 
   const linePath = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
-  
-  // Area path for the smooth gradient fill
   const areaPath = `${linePath} L ${points[points.length - 1].x} ${graphHeight} L ${points[0].x} ${graphHeight} Z`;
 
   const getIcon = (code: string) => {
@@ -32,12 +31,11 @@ export default function HourlyForecast({ hourly }: { hourly: any[] }) {
 
   return (
     <div className="hourly-container" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <span className="stat-label">24-hour temperature trend</span>
+      <span className="stat-label">24-hour temperature trend ({unit === Unit.Metric ? '°C' : '°F'})</span>
       
       <div className="scroll-wrapper">
         <div className="graph-svg-container" style={{ width: `${data.length * colWidth}px` }}>
           
-          {/* Trend Graph Layer */}
           <svg 
             width={data.length * colWidth} 
             height={graphHeight} 
@@ -49,26 +47,13 @@ export default function HourlyForecast({ hourly }: { hourly: any[] }) {
                 <stop offset="100%" stopColor="rgba(255, 255, 255, 0)" />
               </linearGradient>
             </defs>
-            
-            {/* Gradient Fill */}
             <path d={areaPath} fill="url(#graphGradient)" />
-            
-            {/* Main Trend Line */}
-            <path 
-                d={linePath} 
-                fill="none" 
-                stroke="rgba(255, 255, 255, 0.5)" 
-                strokeWidth="2.5" 
-                strokeLinecap="round" 
-            />
-            
-            {/* Data Points */}
+            <path d={linePath} fill="none" stroke="rgba(255, 255, 255, 0.5)" strokeWidth="2.5" strokeLinecap="round" />
             {points.map((p, i) => (
                 <circle key={i} cx={p.x} cy={p.y} r="3.5" fill="#fff" />
             ))}
           </svg>
           
-          {/* Data Overlay Layer (Handles Horizontal Layout & Scrolling) */}
           <div className="hourly-data-overlay">
             {data.map((h, i) => (
               <div key={i} className="hour-column">
@@ -80,11 +65,7 @@ export default function HourlyForecast({ hourly }: { hourly: any[] }) {
                         alt="weather-icon" 
                     />
                 </div>
-
-                {/* High-visibility Timestamp */}
-                <div className="time-label">
-                    {h.datetime.slice(0, 5)}
-                </div>
+                <div className="time-label">{h.datetime.slice(0, 5)}</div>
               </div>
             ))}
           </div>

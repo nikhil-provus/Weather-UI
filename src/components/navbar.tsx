@@ -14,12 +14,13 @@ export default function Navbar({ onSearch, onGoHome, searchQuery, setSearchQuery
         onKeyDown={(e) => e.key === "Enter" && onSearch(searchQuery)}
       />
 
-      {/* The switcher container must have position: relative */}
       <div className="unit-switcher" onClick={toggleUnit}>
-        {/* Sliding background indicator */}
+        {/* Separating Line in the middle */}
+        <div className="unit-divider" />
+        
+        {/* Sliding background fill indicator */}
         <div className={`unit-indicator ${unit === Unit.Imperial ? 'right' : ''}`} />
         
-        {/* Label grid container */}
         <div className="unit-labels-container">
           <span className={unit === Unit.Metric ? 'active' : ''}>C°</span>
           <span className={unit === Unit.Imperial ? 'active' : ''}>F°</span>
