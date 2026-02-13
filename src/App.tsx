@@ -63,7 +63,6 @@ export default function App() {
     setUnit(nextUnit);
   };
 
-  // 4. Optimized Data Fetching
   useEffect(() => {
     if (!currentCity) return;
 
