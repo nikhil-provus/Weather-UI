@@ -3,7 +3,7 @@ import maplibregl from "maplibre-gl";
 export const initMap = (container: HTMLDivElement) => {
   const map = new maplibregl.Map({
     container,
-    style: `${import.meta.env.VITE_MAP_STYLE_URL}`,
+    style: `https://tiles.stadiamaps.com/styles/alidade_smooth_dark.json?api_key=${import.meta.env.VITE_STADIA_API_KEY}`,
     center: [0, 0],
     zoom: 2,
     attributionControl: false,
