@@ -1,18 +1,18 @@
-import maplibregl from 'maplibre-gl';
+import maplibregl from "maplibre-gl";
 
 export const initMap = (container: HTMLDivElement) => {
   const map = new maplibregl.Map({
     container,
-    style: 'https://tiles.stadiamaps.com/styles/alidade_smooth_dark.json',
+    style: "https://tiles.stadiamaps.com/styles/alidade_smooth_dark.json",
     center: [0, 0],
     zoom: 2,
-    attributionControl: false
+    attributionControl: false,
   });
 
   const observer = new ResizeObserver(() => {
     map.resize();
   });
-  
+
   observer.observe(container);
 
   return { map, observer };
@@ -22,7 +22,9 @@ export const flyToCity = async (map: maplibregl.Map, city: string) => {
   if (!city) return;
 
   try {
-    const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${city}`);
+    const res = await fetch(
+      `https://nominatim.openstreetmap.org/search?format=json&q=${city}`,
+    );
     const data = await res.json();
 
     if (data && data.length > 0) {
@@ -31,7 +33,7 @@ export const flyToCity = async (map: maplibregl.Map, city: string) => {
         center: [parseFloat(lon), parseFloat(lat)],
         zoom: 11,
         pitch: 45,
-        speed: 1.2
+        speed: 1.2,
       });
     }
   } catch (err) {

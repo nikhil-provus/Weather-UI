@@ -9,6 +9,7 @@ export interface HourlyData {
 export interface WeatherData {
   temp: number;
   condition: string;
+  description: string;
   humidity: number;
   pressure: number;
   sunrise: string;
@@ -17,7 +18,7 @@ export interface WeatherData {
   windSpeed: number;
   cloudcover: number;
   visibility: number;
-  hours: HourlyData[]; 
+  hours: HourlyData[];
   unit: Unit;
 }
 
@@ -42,9 +43,8 @@ export interface GridCellProps {
 
 export enum Unit {
   Metric = "metric",
-  Imperial = "us"
+  Imperial = "us",
 }
-
 
 export interface NavbarProps {
   onSearch: (city: string) => void;
@@ -54,4 +54,3 @@ export interface NavbarProps {
   unit: Unit;
   toggleUnit: () => void;
 }
-

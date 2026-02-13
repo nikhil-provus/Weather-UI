@@ -1,7 +1,7 @@
-import { useEffect, useRef } from 'react';
-import 'maplibre-gl/dist/maplibre-gl.css';
-import { initMap, flyToCity } from '../api/getMap';
-import maplibregl from 'maplibre-gl';
+import { useEffect, useRef } from "react";
+import "maplibre-gl/dist/maplibre-gl.css";
+import { initMap, flyToCity } from "../api/getMap";
+import maplibregl from "maplibre-gl";
 
 export default function MapComponent({ city }: { city: string }) {
   const mapContainer = useRef<HTMLDivElement>(null);
@@ -25,5 +25,11 @@ export default function MapComponent({ city }: { city: string }) {
     }
   }, [city]);
 
-  return <div ref={mapContainer} className="map-panel" style={{ width: '100%', height: '100%' }} />;
+  return (
+    <div
+      ref={mapContainer}
+      className="map-panel"
+      style={{ width: "100%", height: "100%" }}
+    />
+  );
 }

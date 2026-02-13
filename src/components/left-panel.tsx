@@ -1,4 +1,5 @@
 import { Unit } from "../config/types";
+import type { WeatherData } from "../config/types";
 
 export default function LeftPanel({
   city,
@@ -6,12 +7,11 @@ export default function LeftPanel({
   unit,
 }: {
   city: string;
-  weather: any;
+  weather: WeatherData;
   unit: Unit;
 }) {
-  const MET_BASE = "https://raw.githubusercontent.com/metno/weathericons/main/weather/svg/";
-
-  // Logic to determine the symbol
+  const MET_BASE =
+    "https://raw.githubusercontent.com/metno/weathericons/main/weather/svg/";
   const unitSymbol = unit === Unit.Metric ? "C" : "F";
 
   const getIcon = (vcIcon: string) => {
@@ -37,58 +37,83 @@ export default function LeftPanel({
   }
 
   return (
-    <div className="bento-info-display">
+    <div
+      className="bento-info-display"
+      style={{ height: "100%", position: "relative" }}
+    >
       <p className="stat-label">{city}</p>
+
+      {/* 1. Grouping Icon and Temp together */}
       <div
         style={{
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "flex-start",
           alignItems: "center",
+          gap: "12px",
+          marginTop: "10px",
         }}
       >
-        <div>
-          {/* Enhanced inline-flex container to lock the baseline */}
-          <h1
+        <h1
+          style={{
+            fontSize: "4.5rem",
+            margin: "0",
+            fontWeight: "800",
+            display: "inline-flex",
+            alignItems: "flex-start",
+            lineHeight: "0.9",
+          }}
+        >
+          {Math.round(weather.temp)}
+          <span
             style={{
-              fontSize: "4.5rem",
-              margin: "5px 0",
-              fontWeight: "800",
-              display: "inline-flex",
-              alignItems: "flex-start",
-              lineHeight: "0.9", // Tightened line-height to prevent vertical drift
-            }}
-          >
-            {Math.round(weather.temp)}
-            <span
-              style={{
-                fontSize: "1.8rem",
-                fontWeight: "600",
-                color: "var(--text-secondary)",
-                marginTop: "10px", // Precise offset for the superscript look
-                marginLeft: "2px",
-              }}
-            >
-              °{unitSymbol}
-            </span>
-          </h1>
-          <p
-            style={{
+              fontSize: "1.8rem",
+              fontWeight: "600",
               color: "var(--text-secondary)",
-              textTransform: "capitalize",
+              marginTop: "8px",
+              marginLeft: "2px",
             }}
           >
-            {weather.condition}
-          </p>
-        </div>
+            °{unitSymbol}
+          </span>
+        </h1>
+
         <img
-          src={`${MET_BASE}${getIcon(weather.iconCode || weather.condition)}.svg`}
-          style={{ width: "100px", height: "100px" }}
+          src={`${MET_BASE}${getIcon(weather.condition)}.svg`}
+          style={{ width: "80px", height: "80px", flexShrink: 0 }}
           alt="weather icon"
           onError={(e) => {
             (e.target as HTMLImageElement).src = `${MET_BASE}cloudy.svg`;
           }}
         />
       </div>
+
+      <p
+        style={{
+          color: "var(--text-secondary)",
+          textTransform: "capitalize",
+          fontWeight: "600",
+          marginTop: "15px",
+        }}
+      >
+        {weather.condition}
+      </p>
+
+      {/* 2. Fix for Grid Length: Use line-clamp to prevent vertical expansion */}
+      <p
+        style={{
+          color: "var(--text-secondary)",
+          fontSize: "0.85rem",
+          lineHeight: "1.4",
+          marginTop: "8px",
+          display: "-webkit-box",
+          WebkitLineClamp: 3, // Limits description to 3 lines
+          WebkitBoxOrient: "vertical",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+        }}
+      >
+        {weather.description}
+      </p>
     </div>
   );
 }

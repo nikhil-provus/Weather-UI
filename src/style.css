@@ -36,11 +36,10 @@ html {
   border: 1px solid var(--border-color);
   border-radius: 24px;
   width: 90%;
-  max-width: 550px; 
+  max-width: 550px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
 }
 
-/* FIXED: Cleaned up home button background and border */
 .home-nav-btn {
   background: transparent;
   border: none;
@@ -69,17 +68,17 @@ html {
   color: white;
   font-family: inherit;
   font-size: 1.1rem;
-  flex: 1; 
+  flex: 1;
   min-width: 0;
   outline: none;
 }
 
-/* --- UNIT SWITCHER (DIVIDER & HALF-FILL) --- */
+/* --- UNIT SWITCHER --- */
 .unit-switcher {
   position: relative;
   display: flex;
   flex-shrink: 0;
-  width: 80px; 
+  width: 80px;
   height: 34px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--border-color);
@@ -102,7 +101,7 @@ html {
 
 .unit-labels-container {
   display: grid;
-  grid-template-columns: 1fr 1fr; 
+  grid-template-columns: 1fr 1fr;
   width: 100%;
   height: 100%;
   position: relative;
@@ -127,7 +126,7 @@ html {
   position: absolute;
   top: 0;
   left: 0;
-  width: 50%; 
+  width: 50%;
   height: 100%;
   background: #ffffff;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -150,7 +149,7 @@ html {
 
 .bento-dashboard {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 260px repeat(4, 1fr);
   grid-auto-rows: minmax(140px, auto);
   gap: 16px;
   padding: 120px 24px 60px;
@@ -170,7 +169,7 @@ html {
   position: relative;
 }
 
-/* --- FIXED CHAT TILE --- */
+/* --- CHAT TILE --- */
 .chat-tile {
   grid-column: 2;
   grid-row: span 2;
@@ -247,8 +246,8 @@ html {
   outline: none;
   font-family: inherit;
   font-size: 0.95rem;
-  padding: 0 80px 0 16px; 
-  height: 48px;
+  padding: 0 80px 0 16px;
+  height: 36px;
   width: 100%;
 }
 
@@ -276,7 +275,8 @@ html {
 
 /* --- HOURLY FORECAST --- */
 .hourly-tile {
-  grid-column: span 4;
+  grid-column: 2 / span 4;
+  grid-row: 4;
   min-height: 300px;
 }
 
@@ -351,7 +351,7 @@ html {
   color: var(--text-primary);
 }
 
-/* --- TYPOGRAPHY & MAP --- */
+/* --- MAP --- */
 .weather-main {
   grid-column: 1;
   grid-row: span 2;
@@ -386,7 +386,7 @@ html {
   left: 0;
 }
 
-/* --- METRIC GRID CELL STYLING --- */
+/* --- GRID CELL STYLING --- */
 .stat-tile {
   display: flex;
   flex-direction: column;
@@ -422,4 +422,105 @@ html {
   letter-spacing: -0.02em;
   margin: 0;
   font-size: 2.2rem;
+}
+
+/* --- FAVORITES PANEL --- */
+.favorites-tile {
+  grid-column: 1;
+  grid-row: span 4;
+  display: flex;
+  flex-direction: column;
+  height: 94.4%;
+}
+
+.fav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.pin-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pin-btn.active {
+  background: white;
+  color: black;
+}
+
+.fav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+}
+
+.fav-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  padding: 12px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.fav-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.fav-item.selected {
+  border-color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.fav-city-name {
+  display: block;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.fav-condition {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.fav-temp {
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+/* --- GRID PLACEMENT FOR MAIN TILES --- */
+.weather-main {
+  grid-column: 2;
+}
+.chat-tile {
+  grid-column: 3;
+}
+.map-tile {
+  grid-column: 4 / span 2;
+}
+.hourly-tile {
+  grid-column: 2 / span 4;
+}
+
+/* --- WEATHER DESCRIPTION --- */
+.weather-description {
+  margin: 15px 0;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
 }
