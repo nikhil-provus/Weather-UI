@@ -1,73 +1,70 @@
-# React + TypeScript + Vite
+Gemini said
+Here is the full content for your README.md. I have updated it to reflect the specific "Pitch Black" design system, the Visual Crossing API integration, and your project structure.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🌦️ Weather-UI
+A high-performance, aesthetically driven weather dashboard featuring a professional Pitch Black Bento Grid layout. This application provides real-time meteorological data, interactive mapping, and a custom-built AI Climate Assistant.
 
-Currently, two official plugins are available:
+✨ Key Features
+Pitch Black Bento Design: A sleek, high-contrast UI utilizing glassmorphism and the Bricolage Grotesque typeface for a modern feel.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+AI Climate Assistant: A specialized chat interface with internal auto-scrolling and a VS Code-inspired input area for atmospheric queries.
 
-## React Compiler
+Precision Metrics: Real-time tracking of:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Atmosphere: Pressure in hPa.
 
-## Expanding the ESLint configuration
+Humidity & Dew Point: Rounded percentage and degree tracking.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Sun Cycles: Visualized Sunrise and Sunset timings.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Cloud Cover: Integrated with Visibility (km) data points.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Hourly Trend Graph: Custom SVG-based 24-hour temperature trend with a linear gradient area fill.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Dynamic Search: Intelligent city search with auto-formatting and error-handling to prevent dashboard crashes.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Smart Location: Automatically detects the user's city on mount to provide immediate local data.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+🚀 Tech Stack
+Frontend: React.js, TypeScript
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Styling: CSS3 (Custom Variables, Flexbox, CSS Grid)
+
+Data Source: Visual Crossing Weather API
+
+Icons: MetNo Weather Icons (SVG)
+
+🛠️ Installation & Setup
+Clone the repository:
+
+Bash
+git clone https://github.com/keshav-provus/Weather-UI.git
+cd Weather-UI
+Install dependencies:
+
+Bash
+npm install
+Configure Environment Variables:
+Create a .env file in the root directory and add your Visual Crossing API key:
+
+Code snippet
+VITE_WEATHER_API_KEY=your_api_key_here
+Start the development server:
+
+Bash
+npm run dev
+📐 Project Architecture
+App.tsx: The central orchestrator. It manages the city state and ensures the API isn't called redundantly on mount.
+
+weatherService.ts: A robust service layer that maps complex API responses into a flattened, type-safe interface.
+
+style.css: The design system. Includes the bulletproof Send button fix and the grey-bold visual hierarchy for metrics.
+
+left-panel.tsx: Manages current weather conditions and dynamically loads icons based on atmospheric codes.
+
+🎨 UI Showcase
+Metric Grid
+All metric sub-labels are styled in Bold Grey (--text-secondary) to ensure a clear visual hierarchy between primary data and units.
+
+Chat Assistant
+The input area features a pill-shaped design with an absolutely-positioned Send button to ensure zero overflow, regardless of input length
