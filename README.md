@@ -38,12 +38,6 @@ A sleek, responsive, and performance-driven **Weather Dashboard** built with **R
 4.  Bashnpm run dev
     
 
-### 📂 Project Structure
-
-Plaintext
-
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   ├── api/                # Vercel Edge Functions (Backend)  ├── src/  │   ├── api/            # Frontend API service wrappers  │   ├── components/     # UI Components (Map, Tiles, Charts)  │   ├── utils/          # Helper functions & formatting  │   ├── assets/         # Static assets and icons  │   └── App.tsx         # Main application logic  ├── public/             # Static public assets  └── vite.config.ts      # Vite configuration   `
-
 ### ☁️ Deployment
 
 This project is optimized for **Vercel**.
