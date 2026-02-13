@@ -1,16 +1,21 @@
+import { Unit } from "../config/types";
+
 export default function LeftPanel({
   city,
   weather,
+  unit,
 }: {
   city: string;
   weather: any;
+  unit: Unit;
 }) {
-  const MET_BASE =
-    "https://raw.githubusercontent.com/metno/weathericons/main/weather/svg/";
+  const MET_BASE = "https://raw.githubusercontent.com/metno/weathericons/main/weather/svg/";
+
+  // Logic to determine the symbol
+  const unitSymbol = unit === Unit.Metric ? "C" : "F";
 
   const getIcon = (vcIcon: string) => {
     if (!vcIcon) return "cloudy";
-
     const icon = vcIcon.toLowerCase();
     if (icon.includes("thunder")) return "thunderstorm";
     if (icon.includes("snow")) return "snow";
@@ -42,8 +47,29 @@ export default function LeftPanel({
         }}
       >
         <div>
-          <h1 style={{ fontSize: "4rem", margin: "10px 0", fontWeight: "800" }}>
-            {Math.round(weather.temp)}°
+          {/* Enhanced inline-flex container to lock the baseline */}
+          <h1
+            style={{
+              fontSize: "4.5rem",
+              margin: "5px 0",
+              fontWeight: "800",
+              display: "inline-flex",
+              alignItems: "flex-start",
+              lineHeight: "0.9", // Tightened line-height to prevent vertical drift
+            }}
+          >
+            {Math.round(weather.temp)}
+            <span
+              style={{
+                fontSize: "1.8rem",
+                fontWeight: "600",
+                color: "var(--text-secondary)",
+                marginTop: "10px", // Precise offset for the superscript look
+                marginLeft: "2px",
+              }}
+            >
+              °{unitSymbol}
+            </span>
           </h1>
           <p
             style={{

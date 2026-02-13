@@ -37,3 +37,19 @@ export interface GridCellProps {
   sub?: string;
   children?: React.ReactNode;
 }
+
+export enum Unit {
+  Metric = "metric",
+  Imperial = "us"
+}
+
+
+export interface NavbarProps {
+  onSearch: (city: string) => void;
+  onGoHome: () => void;
+  searchQuery: string;
+  setSearchQuery: (val: string) => void;
+  unit: Unit;
+  toggleUnit: () => void;
+}
+

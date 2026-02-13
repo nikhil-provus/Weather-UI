@@ -1,12 +1,18 @@
-import type { WeatherData } from '../config/types';
+import type { Unit, WeatherData } from '../config/types';
 import { config } from '../config/config';
 
-export async function fetchWeatherData(city: string): Promise<WeatherData | null> {
+export async function fetchWeatherData(city: string, unit: Unit): Promise<WeatherData | null> {
     try {
-        const url = `${config.api.weatherBaseUrl}/${city}?unitGroup=${config.defaults.unitGroup}&key=${config.api.weatherKey}&contentType=json`;
+        // FIX: Use the 'unit' parameter instead of 'config.defaults.unitGroup'
+        const url = `${config.api.weatherBaseUrl}/${city}?unitGroup=${unit}&key=${config.api.weatherKey}&contentType=json`;
+        
         const res = await fetch(url);
         
-        if (!res.ok) return null;
+        if (!res.ok) {
+            console.error(`Weather API error: ${res.status} ${res.statusText}`);
+            return null;
+        }
+        
         const rawData = await res.json();
 
         return {

@@ -70,7 +70,73 @@ html {
   outline: none;
 }
 
+/* --- ULTIMATE ENUM SWITCHER FIX --- */
+.unit-switcher {
+  position: relative;
+  display: flex;
+  width: 76px; 
+  height: 34px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  cursor: pointer;
+  padding: 3px; 
+  overflow: hidden;
+  user-select: none;
+}
+
+/* This container forces C° and F° into two exact halves */
+.unit-labels-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 5; /* Keeps text above the white indicator */
+}
+
+.unit-labels-container span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.4);
+  transition: color 0.25s ease;
+  pointer-events: none; /* Let clicks pass through to parent */
+}
+
+.unit-labels-container span.active {
+  color: #000000; /* High contrast against white pill */
+}
+
+.unit-indicator {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 34px; /* Exactly half of the toggle */
+  height: 28px;
+  background: #ffffff;
+  border-radius: 100px;
+  /* Bouncy transition for a premium feel */
+  transition: transform 0.35s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  z-index: 1;
+}
+
+.unit-indicator.right {
+  transform: translateX(36px); /* Precise alignment for F° */
+}
+
 /* --- DASHBOARD GRID --- */
+.main-wrapper {
+  transition: filter 0.3s ease;
+}
+
+.loading-blur {
+  filter: blur(8px);
+  pointer-events: none;
+}
+
 .bento-dashboard {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -148,7 +214,6 @@ html {
   border-bottom-left-radius: 4px;
 }
 
-/* --- CHAT INPUT FIX --- */
 /* --- BULLETPROOF CHAT INPUT FIX --- */
 .chat-input-area {
   flex-shrink: 0;
@@ -158,9 +223,9 @@ html {
   border-radius: 28px;
   border: 1px solid var(--border-color);
   margin-top: auto;
-  min-height: 48px; /* Slightly taller for better touch/click targets */
-  position: relative; /* Essential for absolute positioning of the button */
-  padding: 0 4px; /* Space for the button */
+  min-height: 48px;
+  position: relative;
+  padding: 0 4px;
 }
 
 .chat-input-area input {
@@ -171,23 +236,23 @@ html {
   outline: none;
   font-family: inherit;
   font-size: 0.95rem;
-  padding: 0 80px 0 16px; /* Right padding of 80px makes room so text doesn't go under the button */
+  padding: 0 80px 0 16px; 
   height: 48px;
   width: 100%;
 }
 
 .chat-input-area button {
-  position: absolute; /* Lock the button to the container */
-  right: 6px; /* 6px from the right edge */
+  position: absolute;
+  right: 6px;
   top: 50%;
-  transform: translateY(-50%); /* Perfectly centers it vertically */
+  transform: translateY(-50%);
   background: #ffffff;
   color: #000000;
   border: none;
-  border-radius: 22px; 
+  border-radius: 22px;
   padding: 0 18px;
-  height: 36px; /* Matches the inner height */
-  font-weight: 800; 
+  height: 36px;
+  font-weight: 800;
   font-size: 0.85rem;
   cursor: pointer;
   display: flex;
@@ -201,46 +266,6 @@ html {
 .chat-input-area button:hover {
   background: #f0f0f0;
   transform: translateY(-50%) scale(1.02);
-}
-
-.chat-input-area button:active {
-  transform: translateY(-50%) scale(0.96);
-}
-
-.chat-input-area input {
-  flex: 1;
-  background: transparent;
-  border: none;
-  color: white;
-  outline: none;
-  font-family: inherit;
-  font-size: 0.9rem;
-  height: 100%;
-}
-
-.chat-input-area button {
-  background: #ffffff;
-  color: #000000;
-  border: none;
-  border-radius: 20px; 
-  padding: 0 16px;
-  height: 32px; /* Fixed height to fit container */
-  font-weight: 800; /* Bolded for visibility */
-  font-size: 0.8rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.1s ease, background 0.2s ease;
-  white-space: nowrap;
-}
-
-.chat-input-area button:hover {
-  background: #f0f0f0;
-}
-
-.chat-input-area button:active {
-  transform: scale(0.96);
 }
 
 /* --- HOURLY FORECAST --- */
@@ -325,6 +350,23 @@ html {
   grid-column: 1;
   grid-row: span 2;
 }
+
+.bento-info-display h1 {
+  font-size: 4.5rem;
+  margin: 5px 0;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: flex-start;
+  line-height: 1;
+}
+
+.bento-info-display h1 span {
+  font-size: 1.8rem;
+  margin-top: 8px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
 .map-tile {
   grid-column: span 2;
   grid-row: span 2;
@@ -362,12 +404,11 @@ html {
   color: var(--text-primary);
 }
 
-/* --- UPDATED SUB-TEXT STYLE --- */
-.stat-sub { 
-    font-size: 0.85rem; 
-    color: var(--text-secondary); /* Grey color */
-    font-weight: 700; /* Bolded as requested */
-    margin-top: 4px;
+.stat-sub {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 700;
+  margin-top: 4px;
 }
 
 .weather-main h2 {
